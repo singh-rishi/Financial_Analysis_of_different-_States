@@ -1,0 +1,579 @@
+--First Query 
+Grouping by (5 years) in SQl
+
+
+1.	Grouping for AGGREGATE_expenditure table
+
+select * into aggregate_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from aggregate_expenditure) as n) as l 
+
+
+select * into aggregate_expd from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from aggregate_rank) as b
+
+
+    2. Grouping for Capital Expenditure table
+
+
+select * into capital_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from capital_expenditure) as n) as l 
+
+
+select * into capital_expd from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from capital_rank) as b
+
+
+   3. Grouping for Gross Fiscal Deficits Table
+
+select * into gross_fiscal_deficits_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from Gross_Fiscal_Deficits) as n) as l 
+
+
+select * into gross_fiscal_def from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from gross_fiscal_deficits_rank) as b
+
+
+   4. Grouping Nominal_GSDP_Series Table
+
+select * into nominal_gsdp_series_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from Nominal_DSDP_Series) as n) as l 
+
+
+select * into Normal_GSDP_Series_New from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from nominal_gsdp_series_rank) as b
+
+   5.Grouping for Own_Tax_Reveneue Table
+
+select * into own_tax_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from Own_tax_Revenue) as n) as l 
+
+
+select * into Own_tax_Revenues from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from own_tax_rank) as b
+
+   6.Grouping for Revenue Deficits
+
+select * into revenue_deficits_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from Revenue_Deficits) as n) as l 
+
+
+select * into Revenue_deficits_new from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from revenue_deficits_rank) as b
+
+  7. Grouping for Revenue_expenditure table
+
+select * into revenue_expenditure_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from Revenue_expenditure) as n) as l 
+
+
+select * into revenue_expenditure_new from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from revenue_expenditure_rank) as b
+
+   8.  Grouping for social_sector_expenditure table
+
+
+select * into social_sector_expenditure_rank from
+(select*,
+case when rank between 1 and 5 then '1980-84'
+when rank between 6 and 10 then '1985-89' 
+when rank between 11 and 15 then '1990-94'
+when rank between 16 and 20 then '1995-99'
+when rank between 21 and 25 then '2000-04' 
+when rank between 26 and 30 then '2005-09'
+when rank between 31 and 35 then '2010-14'
+when rank between 36 and 36 then '2015-00' end as year_range
+from  
+(select *, ROW_NUMBER() over(order by state) as rank 
+from social_sector_expenditure) as n) as l 
+
+
+select * into social_sector_expenditure_new from
+(select distinct(year_range),
+sum(arunachal_pradesh) over(partition by year_range) as Arunachal_pradesh, 
+sum(andhra_pradesh) over(partition by year_range) as andhra_pradesh,
+sum(assam)  over(partition by year_range) as assam,
+sum(bihar)  over(partition by year_range) as bihar, 
+sum(chhattisgarh)  over(partition by year_range) as chhattisgarh, 
+sum(goa)  over(partition by year_range) as goa, 
+sum(gujarat)  over(partition by year_range) as gujarat,
+sum(haryana)  over(partition by year_range) as haryana, 
+sum(himachal_pradesh)  over(partition by year_range) as himachal_pradesh,
+sum(jammu_kashmir)  over(partition by year_range) as jammu_kashmir,
+sum(jharkhand)  over(partition by year_range) as jharkhand,
+sum(karnataka)  over(partition by year_range) as karnataka,
+sum(kerala)  over(partition by year_range) as kerala,
+sum(madhya_pradesh)  over(partition by year_range) as madhya_pradesh,
+sum(maharashtra)  over(partition by year_range) as maharashtra,
+sum(manipur)  over(partition by year_range) as manipur,
+sum(meghalaya)  over(partition by year_range) as meghalaya, 
+sum(mizoram)  over(partition by year_range) as mizoram,
+sum(nagaland)  over(partition by year_range) as nagaland,
+sum(odisha)  over(partition by year_range) as odisha, 
+sum(punjab)  over(partition by year_range) as punjab,
+sum(rajasthan)  over(partition by year_range) as rajasthan,
+sum(sikkim)  over(partition by year_range) as sikkim,
+sum(tamil_nadu)  over(partition by year_range) as tamil_nadu,
+sum(telangana)  over(partition by year_range) as telangana ,
+sum(tripura)  over(partition by year_range) as tripura,
+sum(uttar_pradesh)  over(partition by year_range) as uttar_pradesh, 
+sum(uttarakhand) over(partition by year_range) as uttarakhand,
+sum(west_bengal)  over(partition by year_range) as west_bengal,
+sum(delhi)  over(partition by year_range) as delhi,
+sum(puducherry)  over(partition by year_range) as puducherry
+from social_sector_expenditure_rank) as b
+
+
+Question:- correlation between gross_fiscal_deficits and capital_expenditure
+
+correlation(sum of(gross_fiscal_deficits) and capital_expenditure)
+
+Question: 5 year termly analysis of different Financial Metrics
+
+
+create view  Termly_Total_Expenditure as (
+select a.State,(select sum(term)
+from (values (a.term1),(s.term1)) as total_exp(term)) Term1_total_Expenditure,
+(select sum(term)
+from (values (a.term2),(s.term2)) as total_exp(term)) Term2_total_Expenditure,
+(select sum(term)
+from (values (a.term3),(s.term3)) as total_exp(term)) Term3_total_Expenditure,
+(select sum(term)
+from (values (a.term4),(s.term4)) as total_exp(term)) Term4_total_Expenditure,
+(select sum(term)
+from (values (a.term5),(s.term5)) as total_exp(term)) Term5_total_Expenditure,
+(select sum(term)
+from (values (a.term6),(s.term6)) as total_exp(term)) Term6_total_Expenditure,
+(select sum(term)
+from (values (a.term7),(s.term7)) as total_exp(term)) Term7_total_Expenditure,
+(select sum(term)
+from (values (a.term8),(s.term8)) as total_exp(term)) Term8_total_Expenditure
+from Aggregate_Expenditure1T as a join Social_Sector_Expenditure1T as s
+on a.State=s.State) 
+
+select * from Termly_Total_Expenditure;
+
+
+
+create view Termly_Total_Revenue as (
+ select State,case when Term1_Total_Revenue=0 then Null else Term1_Total_Revenue end as Term1_Total_Revenue
+ ,case when Term2_Total_Revenue=0 then Null else Term2_Total_Revenue end as Term2_Total_Revenue
+ ,case when Term3_Total_Revenue=0 then Null else Term3_Total_Revenue end as Term3_Total_Revenue
+ ,case when Term4_Total_Revenue=0 then Null else Term4_Total_Revenue end as Term4_Total_Revenue
+ ,case when Term5_Total_Revenue=0 then Null else Term5_Total_Revenue end as Term5_Total_Revenue
+ ,case when Term6_Total_Revenue=0 then Null else Term6_Total_Revenue end as Term6_Total_Revenue
+ ,case when Term7_Total_Revenue=0 then Null else Term7_Total_Revenue end as Term7_Total_Revenue
+ ,case when Term8_Total_Revenue=0 then Null else Term8_Total_Revenue end as Term8_Total_Revenue
+ from(
+select state,(term1*100)/70 as Term1_Total_Revenue,(term2*100)/70 as Term2_Total_Revenue
+,(term3*100)/70 as Term3_Total_Revenue,(term4*100)/70 as Term4_Total_Revenue
+,(term5*100)/70 as Term5_Total_Revenue,(term6*100)/70 as Term6_Total_Revenue
+,(term7*100)/70 as Term7_Total_Revenue,(term8*100)/70 as Term8_Total_Revenue
+from Own_Tax_Revenues1T) as k)
+
+select * from Termly_Total_Revenue
+ 
+ create view Termly_total_Loss_of_state as (
+ select tte.state,((tte.Term1_total_Expenditure)-(ttr.Term1_Total_Revenue)) as Term1_loss_of_state
+ ,((tte.Term2_total_Expenditure)-(ttr.Term2_Total_Revenue)) as Term2_loss_of_state
+ ,((tte.Term3_total_Expenditure)-(ttr.Term3_Total_Revenue)) as Term3_loss_of_state
+ ,((tte.Term4_total_Expenditure)-(ttr.Term4_Total_Revenue)) as Term4_loss_of_state
+ ,((tte.Term5_total_Expenditure)-(ttr.Term5_Total_Revenue)) as Term5_loss_of_state
+ ,((tte.Term6_total_Expenditure)-(ttr.Term6_Total_Revenue)) as Term6_loss_of_state
+ ,((tte.Term7_total_Expenditure)-(ttr.Term7_Total_Revenue)) as Term7_loss_of_state
+ ,((tte.Term8_total_Expenditure)-(ttr.Term8_Total_Revenue)) as Term8_loss_of_state
+ from Termly_Total_Expenditure as tte join Termly_Total_Revenue as ttr
+ on tte.state=ttr.state)
+
+ select* from Termly_total_Loss_of_state
+
+ create view Termly_total_Loss_percent_of_state as (
+ select a.state,(Term1_loss_of_state/Term1_Total_Revenue)*100 as Term1_loss_percent
+ ,(Term2_loss_of_state/Term2_Total_Revenue)*100 as Term2_loss_percent
+ ,(Term3_loss_of_state/Term3_Total_Revenue)*100 as Term3_loss_percent
+ ,(Term4_loss_of_state/Term4_Total_Revenue)*100 as Term4_loss_percent
+ ,(Term5_loss_of_state/Term5_Total_Revenue)*100 as Term5_loss_percent
+ ,(Term6_loss_of_state/Term6_Total_Revenue)*100 as Term6_loss_percent
+ ,(Term7_loss_of_state/Term7_Total_Revenue)*100 as Term7_loss_percent
+ ,(Term8_loss_of_state/Term8_Total_Revenue)*100 as Term8_loss_percent
+ from Termly_total_Loss_of_state as a
+ join Termly_Total_Revenue as b
+ on a.state=b.state)
+
+select * from Termly_total_Loss_percent_of_state
+
+create view Overall_Aggregate_of_Termly_total_Loss_of_state as (
+select State,(select sum(term)
+from (values (Term1_loss_of_state),(Term2_loss_of_state),(Term3_loss_of_state),(Term4_loss_of_state),
+(Term5_loss_of_state),(Term6_loss_of_state),
+(Term7_loss_of_state),(Term8_loss_of_state)) 
+as total_exp(term)) Overall_Termly_total_Loss_of_state
+from Termly_total_Loss_of_state)
+
+select * from Overall_Aggregate_of_Termly_total_Loss_of_state
+
+
+
+Question:- Correlation between social sector expenditure and tax revenues for different states
+
+create view own_tax_revenues1T_Null as (
+select State,case when Term1=0 then Null else Term1 end as Term1
+ ,case when Term2=0 then Null else Term2 end as Term2
+ ,case when Term3=0 then Null else Term3 end as Term3
+ ,case when Term4=0 then Null else Term4 end as Term4
+ ,case when Term5=0 then Null else Term5 end as Term5
+ ,case when Term6=0 then Null else Term6 end as Term6
+ ,case when Term7=0 then Null else Term7 end as Term7
+ ,case when Term8=0 then Null else Term8 end as Term8
+ from own_tax_revenues1T)
+
+create view Termly_loss_correlation as (
+select a.state,((a.term1)-(b.term1)) as Term1_loss_correlation
+,((a.term2)-(b.term2)) as Term2_loss_correlation
+,((a.term3)-(b.term3)) as Term3_loss_correlation
+,((a.term4)-(b.term4)) as Term4_loss_correlation
+,((a.term5)-(b.term5)) as Term5_loss_correlation
+,((a.term6)-(b.term6)) as Term6_loss_correlation
+,((a.term7)-(b.term7)) as Term7_loss_correlation
+,((a.term8)-(b.term8)) as Term8_loss_correlation
+from Social_Sector_Expenditure1T as a join own_tax_revenues1T_Null as b
+on a.state=b.state)
+
+select * from Termly_loss_correlation
+ 
+create view Termly_loss_percent_correlation as (
+select a.state,((((a.term1)-(b.term1))/b.term1)*100) as Term1_loss_percent_correlation
+,((((a.term2)-(b.term2))/b.term2)*100) as Term2_loss_percent_correlation
+,((((a.term3)-(b.term3))/b.term3)*100) as Term3_loss_percent_correlation
+,((((a.term4)-(b.term4))/b.term4)*100) as Term4_loss_percent_correlation
+,((((a.term5)-(b.term5))/b.term5)*100) as Term5_loss_percent_correlation
+,((((a.term6)-(b.term6))/b.term6)*100) as Term6_loss_percent_correlation
+,((((a.term7)-(b.term7))/b.term7)*100) as Term7_loss_percent_correlation
+,((((a.term8)-(b.term8))/b.term8)*100) as Term8_loss_percent_correlation
+from Social_Sector_Expenditure1T as a join own_tax_revenues1T_Null as b
+on a.state=b.state)
+select * from Termly_loss_percent_correlation
+
+
+Question :-Top 10 states with highest gross fiscal deficit
+
+create view Total_Gross_Fiscal_Deficits_Of_State as (
+select State,(select sum(term)
+from (values (term1),(term2),(term3),(term4),(term5),(term6),(term7),(term8)) as total_exp(term)) Sum_of_gross_fiscal_deficits
+from Gross_Fiscal_Deficits1T)
+select * from Total_Gross_Fiscal_Deficits_Of_State
+
+create view Top_10_States_Highest_Gross_Fiscal_Deficit as (
+select top 10 state as Top_10_States,
+max(Sum_of_gross_fiscal_deficits) as Highest_Gross_Fiscal_Deficit
+from Total_Gross_Fiscal_Deficits_Of_State
+group by state
+order by max(Sum_of_gross_fiscal_deficits) desc)
+
+select * from Top_10_States_Highest_Gross_Fiscal_Deficit
+
+
+
+
+
+
